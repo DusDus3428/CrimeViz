@@ -1,5 +1,5 @@
 from logging.config import dictConfig
-from python_gatherer_app.model.target_data_portal import TargetDataPortal
+from python_data_gatherer_app.model.target_data_portal import TargetDataPortal
 from flask import Flask
 
 

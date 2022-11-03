@@ -1,7 +1,7 @@
 from apscheduler.schedulers.background import BackgroundScheduler
-from python_gatherer_app import flask_app
-from python_gatherer_app import la
-from python_gatherer_app.service import data_portal_service
+from python_data_gatherer_app import flask_app
+from python_data_gatherer_app import la
+from python_data_gatherer_app.service import data_portal_service
 
 
 if __name__ == '__main__':

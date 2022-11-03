@@ -1,5 +1,5 @@
 import requests
-from python_gatherer_app import flask_app
+from python_data_gatherer_app import flask_app
 
 
 def get_crime_data(target_data_portal):
