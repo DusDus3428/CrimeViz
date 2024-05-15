@@ -118,7 +118,9 @@ These requirements describe CrimeViz’s properties.
 
 ### 2.3 Use Cases
 #### 2.2.1 Diagram
-![Use Case Diagram CrimeViz](./diagrams/v0.1/CrimeViz-UseCaseDiagram.png)
+<p align="center">
+  <img align="center" src="./diagrams/v0.1/CrimeViz-UseCaseDiagram.png"/>
+</p>
 <p align="center" style="font-style:italic">Figure 1: Use case diagram depicting the use cases offered by CrimeViz</p>
 
 There is currently only one identifiable use case: View Crime Data. It describes how a user can request crime data from the application for viewing.
@@ -164,9 +166,9 @@ While CrimViz fetches data from open data APIs and stores it in a database, this
       <td>
         <ol>
           <li>To retrieve crime data to a chosen city, the user sends a GET request to CrimeViz’s CrimeAPI
-            <ol type="a">
+            <ol>
               <li>Spring Backend requests the crime data from CouchDB Database</li>
-                <ol type="a">
+                <ol>
                   <li>CouchDB Database gathers and sends the data with status code 200 to Spring Backend</li>
                 </ol>
             </ol>
@@ -178,22 +180,22 @@ While CrimViz fetches data from open data APIs and stores it in a database, this
     <tr>
       <td style="font-weight:bold">Alternative Flows</td>
       <td>
-        In 1.a.a: CouchDB Database is unavailable (status code 503)
-        <ol type="a">
-          <li>Spring Backed retries the attempt (step 1.a in basic flow) twice in three-second intervals
-            <ol type="a">
+        In 1.i.a: CouchDB Database is unavailable (status code 503)
+        <ol>
+          <li>Spring Backed retries the attempt (step 1.i in basic flow) twice in three-second intervals
+            <ol>
               <li>If the response’s status code remains something other than 200, Spring Backend sends a message to the user, informing them of the situation -> end use case</li>
-              <li>If the response’s status code is 200 -> continue with step 1.a.a in basic flow </li>
+              <li>If the response’s status code is 200 -> continue with step 1.i.a in basic flow </li>
             </ol>
           </li>
         </ol>
-        In 1.a.a: CouchDB Database cannot find the requested data
-        <ol type="a">
+        In 1.i.a: CouchDB Database cannot find the requested data
+        <ol>
           <li>CouchDB Database sends a message to Spring Backed with the appropriate information</li>
           <li>Spring Backend sends a message to the user, informing them of the situation -> end use case</li>
         </ol>
-        In 1.a: Spring Backend is unavailable
-        <ol type="a">
+        In 1.i: Spring Backend is unavailable
+        <ol>
           <li>The user gets an error message with status code 404 -> end use case</li>
         </ol>
       </td>
@@ -207,7 +209,9 @@ While CrimViz fetches data from open data APIs and stores it in a database, this
 CrimeViz consists of many services, each fulfilling a single duty. This is illustrated by the component diagram below. Each component built from scratch is depicted as a white box, therefore the implementation of these components is known. Each component for which the implementation is unknown is presented as a black box.
 CrimeViz’s components, also called services, are containerized using Docker. 
 
-![Component Diagram Overview CrimeViz](./diagrams/v0.1/CrimeViz-ComponentDiagram_Overview.png)
+<p align="center">
+  <img src="./diagrams/v0.1/CrimeViz-ComponentDiagram_Overview.png"/>
+</p>
 <p align="center" style="font-style:italic">Figure 2: Component diagram depicting all major components of CrimeViz</p>
 
 The CrimeViz application consists of two main components. 
@@ -231,7 +235,9 @@ Retrieving Crime objects from CouchDB Database
 Offering the Crime objects via an API to any clients
 
 ### 4.2 Internal Structure
-![Component Diagram Spring Backend CrimeViz](./diagrams/v0.1/CrimeViz-ComponentDiagram_SpringBackend.png)
+<p align="center">
+  <img src="./diagrams/v0.1/CrimeViz-ComponentDiagram_SpringBackend.png"/>
+</p>
 <p align="center" style="font-style:italic">Figure 3: Component diagram depicting all major components that are part of the Spring Backend component shown in Figure 2</p>
 
 Spring Backend is comprised of four components. 
@@ -242,7 +248,9 @@ The CrimeApi component exposes an API to the internet, which one can use to retr
 
 ### 4.3 Sequence Diagrams
 #### 4.3.1 GetRawCrimeData
-![Sequence Diagram GetRawCrimeDate CrimeViz](./diagrams/v0.1/CrimeViz-SequenceDiagram_GetRawCrimeDate.png)
+<p align="center">
+  <img src="./diagrams/v0.1/CrimeViz-SequenceDiagram_GetRawCrimeDate.png"/>
+</p>
 <p align="center" style="font-style:italic">Figure 4: Sequence diagram showing the process of how CirmeViz retrieves raw crime data from Crime Data API</p>
 
 Please note that the Los Angeles open data portal was used as a reference for the API’s responses and status codes. The diagram will be adapted as new APIs are targeted. 
@@ -251,7 +259,9 @@ After another unsuccessful attempt, RawCrimeApiClient logs a failure message. If
 The mapper maps the raw crime data objects to uniform crime data objects. After this, CouchDBDatabaseClient sends the data for storage to CouchDB Database. Similar to how it is done with Crime Data API, there is a retry mechanism for this interaction (same amount of attempts and time intervals). The status code that warrants a retry is 503 (based on the CouchDB documentation). Basic auth is used for authentication purposes. If a third retry yields a 201 status code the client will log a success message, if not, it will log a failure message instead.
 
 #### 4.3.2 GetCrimeData
-![Sequence Diagram GetCrimeDate CrimeViz](./diagrams/v0.1/CrimeViz-SequenceDiagram_GetCrimeDate.png)
+<p align="center">
+  <img src="./diagrams/v0.1/CrimeViz-SequenceDiagram_GetCrimeDate.png"/>
+</p>
 <p align="center" style="font-style:italic">Figure 5: Sequence diagram depicting the process of how a user gets crime data from CrimeViz</p>
 
 First, the user sends a GET request to CrimeApi. The target city’s code must be present as a URL parameter. This city code is then sent to CouchDBDatabaseClient.
