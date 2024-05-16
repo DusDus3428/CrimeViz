@@ -1,0 +1,13 @@
+services:
+  couchdb_database:
+    image: couchdb:3.3.3
+    environment:
+      - COUCHDB_USER=${COUCHDB_USER}
+      - COUCHDB_PASSWORD=${COUCHDB_PASSWORD}
+    ports:
+      - "5984:5984"
+    volumes:
+      - crimeviz-db:/opt/couchdb/data
+
+volumes:
+  crimeviz-db:

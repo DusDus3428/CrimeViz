@@ -1,0 +1,2 @@
+include:
+  - couchdb_database/docker-compose.yaml
